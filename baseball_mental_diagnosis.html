@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>野球選手メンタル診断</title>
+<style>
+:root{--bg:#0b0b0d;--card:#17171b;--line:#303039;--text:#f5f5f7;--muted:#a9a9b2;--accent:#d4a72c}
+*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#0b0b0d,#15151a);color:var(--text);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",sans-serif}
+main{max-width:680px;margin:auto;padding:24px 16px 50px}.brand{font-size:13px;letter-spacing:.12em;color:var(--accent);font-weight:800}
+h1{font-size:28px;line-height:1.25;margin:8px 0}.lead{color:var(--muted);line-height:1.7}
+.card{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:18px;margin-top:16px}
+.q{border-top:1px solid var(--line);padding-top:18px;margin-top:18px}.q:first-child{border-top:0;padding-top:0;margin-top:0}
+.qtitle{font-weight:800;line-height:1.55}.opt{display:block;margin-top:9px;border:1px solid var(--line);border-radius:12px;padding:12px;cursor:pointer}.opt:has(input:checked){border-color:var(--accent);background:#211d11}.opt input{margin-right:8px}
+button{width:100%;min-height:50px;border:0;border-radius:12px;background:var(--accent);color:#111;font-size:16px;font-weight:900;margin-top:20px;cursor:pointer}
+.result{display:none}.type{font-size:27px;font-weight:900;margin:8px 0 16px}.box{background:#111115;border-radius:12px;padding:14px;margin-top:12px;line-height:1.75}
+.note{font-size:12px;color:var(--muted);line-height:1.6;margin-top:16px}
+</style>
+</head>
+<body>
+<main>
+<div class="brand">BASEBALL × MENTAL</div>
+<h1>野球選手メンタル診断</h1>
+<p class="lead">10問に答えるだけで、今のあなたのメンタル傾向と、取り組むポイントがわかります。</p>
+
+<form id="form" class="card"></form>
+<div id="result" class="card result"></div>
+</main>
+
+<script>
+const questions=[
+["ミスをすると、その後のプレーまで引きずってしまう。","切替"],
+["大事な場面になると、普段より体に力が入りやすい。","緊張"],
+["失敗しないように考えすぎて、思い切ってプレーできないことがある。","慎重"],
+["試合中、周りの選手や相手の評価が気になる。","他者"],
+["うまくいかないと「自分はダメだ」と考えてしまう。","自己"],
+["プレッシャーがかかると、普段できていることができなくなる。","緊張"],
+["良いプレーをしても「たまたま」と思ってしまう。","自己"],
+["ミスした後、次のプレーに集中するまで時間がかかる。","切替"],
+["他人と比べて、自分の実力に自信をなくすことがある。","他者"],
+["「失敗したらどうしよう」と考えることが多い。","慎重"]
+];
+const opts=["ほとんどない","たまにある","よくある","かなりある"];
+const form=document.getElementById("form");
+form.innerHTML=questions.map((q,i)=>`<section class="q">
+<div class="qtitle">${i+1}. ${q[0]}</div>
+${opts.map((o,v)=>`<label class="opt"><input required type="radio" name="q${i}" value="${v}">${o}</label>`).join("")}
+</section>`).join("")+
+`<button type="submit">診断結果を見る</button>
+<p class="note">※この診断は自己理解のための簡易チェックです。医学的・心理学的な診断ではありません。</p>`;
+
+const advice={
+切替:["切り替え課題型","ミスの後に意識が過去へ戻りやすい傾向があります。","「次の1球で何をするか」を言葉にして、視線・呼吸・姿勢をリセットする練習がおすすめです。"],
+緊張:["プレッシャー反応型","大事な場面で身体や思考に変化が出やすい傾向があります。","緊張を消そうとするより、呼吸・ルーティン・準備動作など「いつも通りの行動」に戻る練習がおすすめです。"],
+慎重:["慎重思考型","失敗を避けようと考えることで、プレーが小さくなることがあります。","結果ではなく「今日やる行動」を1つ決め、思い切って実行する練習がおすすめです。"],
+他者:["他者意識型","周囲との比較や評価に意識が向きやすい傾向があります。","他人ではなく「自分がコントロールできること」に意識を戻す練習がおすすめです。"],
+自己:["自己評価課題型","自分への評価が厳しくなりやすい傾向があります。","できなかったことだけでなく「できたこと・前回からの成長」を記録する習慣がおすすめです。"]
+};
+
+form.addEventListener("submit",e=>{
+ e.preventDefault();
+ const scores={切替:0,緊張:0,慎重:0,他者:0,自己:0};
+ questions.forEach((q,i)=>{scores[q[1]]+=Number(form.querySelector(`input[name="q${i}"]:checked`).value)});
+ const type=Object.entries(scores).sort((a,b)=>b[1]-a[1])[0][0];
+ const a=advice[type];
+ const r=document.getElementById("result");
+ r.innerHTML=`<div class="brand">YOUR RESULT</div><div class="type">${a[0]}</div>
+ <div class="box"><b>あなたの傾向</b><br>${a[1]}</div>
+ <div class="box"><b>おすすめの取り組み</b><br>${a[2]}</div>
+ <div class="box"><b>まず今日やること</b><br>次の練習で「自分がコントロールできる行動」を1つ決めて実行してみよう。</div>
+ <p class="note">この結果は現在の回答から見た傾向です。良し悪しを決めるものではありません。</p>`;
+ r.style.display="block";r.scrollIntoView({behavior:"smooth"});
+});
+</script>
+</body>
+</html>
