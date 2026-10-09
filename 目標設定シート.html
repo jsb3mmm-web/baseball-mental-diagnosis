@@ -1,37 +1,56 @@
 <!doctype html>
 <html lang="ja">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="theme-color" content="#102b50"><title>野球選手向け 目標設定ワーク</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#102b50">
+<title>野球選手 目標設定ワーク｜アドバイス付き</title>
 <style>
-:root{--navy:#102b50;--blue:#245d9b;--gold:#ffd34e;--muted:#5c6b7a}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#e4edf6,#f7f9fb);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;color:var(--navy);line-height:1.55}
-main{max-width:680px;margin:0 auto;padding:18px 14px 32px}.hero{background:var(--navy);color:white;border-radius:20px;padding:24px 20px;margin-bottom:16px}
-.kicker{display:inline-block;background:var(--gold);color:var(--navy);font-weight:800;padding:4px 10px;border-radius:6px;font-size:13px}
-h1{font-size:clamp(27px,7vw,38px);line-height:1.2;margin:12px 0 8px}.hero p{margin:0;color:#e7eef8}
-.card{background:white;border:1px solid #d7e1ec;border-radius:16px;padding:18px;margin:12px 0;box-shadow:0 4px 14px #102b500b}
-.step{display:flex;align-items:center;gap:10px;margin:0 0 8px;font-size:19px;font-weight:800}.num{display:inline-flex;align-items:center;justify-content:center;flex:0 0 34px;width:34px;height:34px;border-radius:50%;background:var(--navy);color:white;font-size:16px}
-label{display:block;font-weight:700;margin:8px 0}.hint{font-size:13px;color:var(--muted);margin:0 0 8px}
-input,textarea,select{width:100%;font:inherit;color:#142d4a;background:#fbfdff;border:1.5px solid #c8d7e8;border-radius:11px;padding:12px;outline:none}
-input:focus,textarea:focus,select:focus{border-color:var(--blue);box-shadow:0 0 0 3px #245d9b20}textarea{resize:vertical;min-height:82px}
-.actions{display:grid;grid-template-columns:1fr;gap:9px;margin:18px 0}button{border:0;border-radius:12px;padding:14px 16px;font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--navy);color:white}.secondary{background:var(--gold);color:var(--navy)}
-#result{display:none;white-space:pre-wrap;background:#fffdf3;border:2px solid var(--gold);border-radius:14px;padding:16px;margin-top:12px}.note{font-size:12px;color:var(--muted);text-align:center;margin-top:18px}
-@media(min-width:520px){.actions{grid-template-columns:1fr 1fr}}
-</style></head>
+:root{--navy:#102b50;--blue:#245d9b;--gold:#ffd34e;--ink:#19324d;--muted:#617286;--line:#d7e1ec}
+*{box-sizing:border-box}body{margin:0;background:#edf3f8;color:var(--ink);font-family:-apple-system,BlinkMacSystemFont,"Hiragino Kaku Gothic ProN","Yu Gothic",Meiryo,sans-serif;line-height:1.6}
+main{max-width:700px;margin:auto;padding:16px 13px 32px}.hero{background:var(--navy);color:white;padding:23px 20px;border-radius:18px;margin-bottom:14px}.tag{display:inline-block;background:var(--gold);color:var(--navy);padding:3px 9px;border-radius:5px;font-size:12px;font-weight:800}h1{font-size:30px;line-height:1.25;margin:10px 0 7px}.hero p{margin:0;color:#e6edf7}.card{background:#fff;border:1px solid var(--line);border-radius:15px;padding:17px;margin:12px 0;box-shadow:0 3px 12px #102b5008}h2{font-size:18px;margin:0 0 10px;display:flex;gap:9px;align-items:center}.n{background:var(--navy);color:white;width:31px;height:31px;border-radius:50%;display:inline-grid;place-items:center;flex:none;font-size:15px}label{display:block;font-weight:700;margin:10px 0 6px}small,.hint{color:var(--muted);font-size:13px}textarea,input,select{width:100%;border:1.5px solid #c7d6e7;border-radius:10px;padding:12px;font:inherit;background:#fbfdff;color:var(--ink)}textarea{min-height:78px;resize:vertical}button{font:inherit;font-weight:800;border:0;border-radius:11px;padding:13px 15px;cursor:pointer}.primary{background:var(--navy);color:#fff;width:100%;margin-top:8px}.gold{background:var(--gold);color:var(--navy);width:100%;margin-top:9px}.result{display:none}.result h2{margin-bottom:12px}.advice{background:#f2f7ff;border-left:4px solid var(--blue);border-radius:8px;padding:12px;margin:10px 0}.next{background:#fff9df;border-left:4px solid #e0ad21;border-radius:8px;padding:12px;margin:10px 0}.footer{text-align:center;font-size:12px;color:var(--muted);padding:10px}
+</style>
+</head>
 <body><main>
-<header class="hero"><span class="kicker">野球選手向け</span><h1>目標設定ワーク</h1><p>目標を「毎日の行動」につなげて、成長につなげよう！</p></header>
-<form id="goalForm">
-<section class="card"><h2 class="step"><span class="num">1</span>目標を決める</h2><label for="goal">どんな選手になりたい？</label><p class="hint">できるだけ具体的に書こう。</p><textarea id="goal" placeholder="例：球速130km/hを達成したい" required></textarea></section>
-<section class="card"><h2 class="step"><span class="num">2</span>期限を決める</h2><label for="deadline">いつまでに達成したい？</label><select id="deadline" required><option value="">選んでください</option><option>1か月以内</option><option>3か月以内</option><option>6か月以内</option><option>1年以内</option><option>その他（下の欄に記入）</option></select><label for="customDeadline">具体的な日付・期限（任意）</label><input id="customDeadline" placeholder="例：2027年3月末まで"></section>
-<section class="card"><h2 class="step"><span class="num">3</span>今の課題を考える</h2><label for="challenge">目標達成のために、何が必要？</label><textarea id="challenge" placeholder="例：体の使い方を改善する"></textarea></section>
-<section class="card"><h2 class="step"><span class="num">4</span>毎日の行動を決める</h2><label for="action">明日から何をする？</label><textarea id="action" placeholder="例：練習前に10分間、動作改善に取り組む" required></textarea></section>
-<section class="card"><h2 class="step"><span class="num">5</span>振り返りの基準</h2><label for="measure">何ができたら前進と言える？</label><textarea id="measure" placeholder="例：週3回取り組めたか記録する"></textarea></section>
-<div class="actions"><button type="button" class="primary" id="copyBtn">回答をまとめてコピー</button><button type="reset" class="secondary">入力内容をリセット</button></div>
-</form><div id="result" role="status" aria-live="polite"></div><p class="note">このワークは目標を整理するためのものです。無理のない目標と行動を設定し、定期的に見直しましょう。</p>
+<header class="hero"><span class="tag">野球選手向け・無料ワーク</span><h1>目標設定ワーク</h1><p>目標を書くだけで終わらせない。入力内容に合わせて、次の行動のヒントを返します。</p></header>
+<form id="f">
+<section class="card"><h2><span class="n">1</span>目標を決める</h2><label for="goal">どんな選手になりたい？</label><textarea id="goal" required placeholder="例：球速を上げたい／レギュラーになりたい"></textarea><label for="kind">目標の種類</label><select id="kind"><option value="skill">技術（投球・打撃・守備など）</option><option value="result">結果（球速・打率・レギュラーなど）</option><option value="mind">メンタル（緊張・自信・切り替えなど）</option><option value="habit">練習習慣・取り組み方</option></select></section>
+<section class="card"><h2><span class="n">2</span>期限を決める</h2><label for="deadline">いつまでに達成したい？</label><select id="deadline" required><option value="">選んでください</option><option value="1か月以内">1か月以内</option><option value="3か月以内">3か月以内</option><option value="6か月以内">6か月以内</option><option value="1年以内">1年以内</option><option value="未定">まだ決まっていない</option></select></section>
+<section class="card"><h2><span class="n">3</span>今の課題を考える</h2><label for="challenge">目標達成のために、何が課題だと思う？</label><textarea id="challenge" placeholder="例：体の使い方が安定しない／何を練習すべきか分からない"></textarea></section>
+<section class="card"><h2><span class="n">4</span>毎日の行動を決める</h2><label for="action">目標に向けて何をする？</label><textarea id="action" required placeholder="例：毎日たくさん投げ込む"></textarea><p class="hint">まだ決まっていなくても大丈夫。</p></section>
+<section class="card"><h2><span class="n">5</span>振り返りの基準</h2><label for="measure">何ができたら前進と言える？</label><textarea id="measure" placeholder="例：週3回取り組む／練習後に記録する"></textarea></section>
+<button type="submit" class="primary">自分に合ったアドバイスを見る</button>
+</form>
+<section class="card result" id="result" aria-live="polite"><h2>⚾️ あなたへのアドバイス</h2><div id="summary"></div><div id="advice"></div><div class="next" id="next"></div><button class="gold" type="button" id="copy">回答とアドバイスをコピー</button><button type="button" class="primary" id="edit">回答を見直す</button><p class="hint">アドバイスは入力内容に基づく一般的なヒントです。技術や身体の課題は、指導者と確認しながら取り組みましょう。</p></section>
+<div class="footer">入力内容はこのページ内で処理され、サーバーには送信されません。必要ならコピーして自分で保存してください。</div>
 </main>
 <script>
 const $=id=>document.getElementById(id);
-function makeText(){const d=$('deadline').value,c=$('customDeadline').value.trim();return ['【野球選手 目標設定ワーク】','① 目標：'+$('goal').value.trim(),'② 期限：'+(d||'未入力')+(c?'（'+c+'）':''),'③ 今の課題：'+($('challenge').value.trim()||'未入力'),'④ 毎日の行動：'+$('action').value.trim(),'⑤ 振り返りの基準：'+($('measure').value.trim()||'未入力')].join('\n')}
-$('copyBtn').addEventListener('click',async()=>{if(!$('goal').value.trim()||!$('action').value.trim()||!$('deadline').value){$('result').style.display='block';$('result').textContent='「目標」「期限」「毎日の行動」を入力してください。';return}const t=makeText();try{await navigator.clipboard.writeText(t);$('result').style.display='block';$('result').textContent='回答をコピーしました！メモなどに貼り付けて保存してください。\n\n'+t}catch(e){$('result').style.display='block';$('result').textContent='下の回答を長押ししてコピーしてください。\n\n'+t}});
-$('goalForm').addEventListener('reset',()=>setTimeout(()=>{$('result').style.display='none';$('result').textContent=''},0));
+let output='';
+function makeAdvice(){
+ const goal=$('goal').value.trim(), kind=$('kind').value, deadline=$('deadline').value, challenge=$('challenge').value.trim(), action=$('action').value.trim(), measure=$('measure').value.trim();
+ let tips=[], next='';
+ if(!goal) tips.push('まずは「どんな選手になりたいか」を一文で書こう。');
+ if(kind==='result') tips.push('結果目標に加えて、自分でコントロールできる行動目標も決めよう。結果そのものは相手や状況にも左右されるため、毎日の行動に落とし込むことが大切です。');
+ if(kind==='skill') tips.push('技術目標は少し具体的にすると取り組みやすくなります。「何を」「どんな場面で」改善したいかを指導者と確認し、まずは一つに絞ろう。');
+ if(kind==='mind') tips.push('メンタル目標も行動に変えられます。例えば「緊張しない」ではなく、「打席に入る前に息をゆっくり吐く」など、実行できる行動を決めよう。');
+ if(kind==='habit') tips.push('習慣は、量を増やすより「いつ・どこで・何をするか」を具体的にすると続けやすくなります。');
+ if(deadline==='未定') tips.push('期限がまだ決まっていません。まずは1〜2週間の短い期間で試し、進み具合を見て見直してみよう。');
+ else if(deadline==='1か月以内') tips.push('期限は短めです。大きな結果を急ぐより、今月取り組む行動を一つに絞って継続できるか確認しよう。');
+ else tips.push('期限が決まっています。途中のチェック日も決めて、期限まで待たずに進み具合を確認しよう。');
+ if(!challenge) tips.push('課題がまだ曖昧なら、「目標に近づくために足りないものは何か？」を指導者や保護者と一緒に整理してみよう。');
+ else tips.push('課題は「'+challenge+'」と考えているんだね。これが本当に優先課題か、練習や記録をもとに一度確かめてみよう。');
+ if(!action || /たくさん|頑張る|努力する|練習する/.test(action)) tips.push('今の行動目標は少し広いかもしれません。「何を・いつ・何分／何回やるか」まで決めると実行しやすくなります。');
+ else tips.push('行動目標が書けています。無理なく続けられる量かを確認し、実行できた日を記録しよう。');
+ if(!measure) tips.push('振り返りの基準も決めよう。回数・実施日・気づきなど、自分で確認できるものがおすすめです。');
+ next='【次の練習でやること】\\n'+(action && !/たくさん|頑張る|努力する|練習する/.test(action)?'「'+action+'」を実行し、終わったらできたかを記録する。':'行動を「何を・いつ・どれくらい」に分けて一つ決める。')+'\\n\\n【振り返り】\\n'+(measure||'練習後に「できたこと」と「次に変えること」を一つずつ記録する。');
+ output='【目標設定ワーク】\\n目標：'+goal+'\\n目標の種類：'+$('kind').selectedOptions[0].textContent+'\\n期限：'+deadline+'\\n今の課題：'+(challenge||'未記入')+'\\n毎日の行動：'+(action||'未記入')+'\\n振り返りの基準：'+(measure||'未記入')+'\\n\\n【あなたへのアドバイス】\\n'+tips.map((x,i)=>(i+1)+'. '+x).join('\\n')+'\\n\\n'+next;
+ $('summary').textContent='目標：'+goal+'\\n期限：'+deadline;
+ $('advice').innerHTML='';
+ tips.forEach((t,i)=>{const d=document.createElement('div');d.className='advice';d.textContent=(i+1)+'. '+t;$('advice').appendChild(d)});
+ $('next').textContent=next;$('result').style.display='block';$('result').scrollIntoView({behavior:'smooth',block:'start'});
+}
+$('f').addEventListener('submit',e=>{e.preventDefault();makeAdvice()});
+$('edit').addEventListener('click',()=>{$('result').style.display='none';$('goal').focus();window.scrollTo({top:0,behavior:'smooth'})});
+$('copy').addEventListener('click',async()=>{try{await navigator.clipboard.writeText(output);$('copy').textContent='コピーしました！';}catch(e){const t=document.createElement('textarea');t.value=output;document.body.appendChild(t);t.select();document.execCommand('copy');t.remove();$('copy').textContent='コピーしました！'}});
 </script></body></html>
